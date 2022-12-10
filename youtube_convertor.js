@@ -2,7 +2,7 @@ const ytdl = require('ytdl-core');
 const ffmpeg = require('fluent-ffmpeg');
 
 // Replace with the URL of the YouTube video you want to convert.
-const url = 'https://www.youtube.com/watch?v=PK8pGdyq1fs&ab_channel=CodingShiksha';
+// const url = "https://www.youtube.com/watch?v=iwYDfyCABAc&ab_channel=MrsJennii18";
 
 // Replace with the path and filename where you want to save the MP3 file.
 const filePath = './video.mp3';
@@ -26,3 +26,6 @@ ffmpeg(stream)
     console.log('Finished converting YouTube video to MP3');
   })
   .run();
+
+
+module.export()

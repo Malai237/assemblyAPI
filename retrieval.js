@@ -11,7 +11,7 @@ const assembly = axios.create({
     },
 });
 
-let transcriptID = 'r7lk0gib8c-45da-4b9a-a59a-6c18f23ad6c6'
+let transcriptID = 'r7l7ro2wvs-eba6-4bca-acbb-ac34f12fab7f'
 
 
 async function upload(transcriptID){
@@ -19,13 +19,16 @@ async function upload(transcriptID){
     let res =""
     while (!found){
         res = await assembly.get(`/transcript/${transcriptID}`);
-        console.log(`Still searching data for ${transcriptID}`)
+
         if (res.data.status == "completed"){
             found = true;
         }
+        console.log(`Still searching data for ${transcriptID}`)
         await delay(5000);
     }
-    console.log(res.data.summary)
+    console.log(Object.keys(res.data))
+    console.log(`Summary: ${res.data.summary}`)
+    console.log(`Transcription: ${res.data.text}`)
 
 }
 
