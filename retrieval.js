@@ -19,7 +19,7 @@ async function retrieve(transcriptID){
     let res =""
     while (!found){
         res = await assembly.get(`/transcript/${transcriptID}`);
-        console.log(res.data.status)
+        console.log(`Current Status for finding transcription: ${res.data.status}`)
 
         if (res.data.status == "completed"){
             found = true;
