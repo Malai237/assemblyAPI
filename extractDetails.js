@@ -24,12 +24,12 @@ async function extract(url){
     let info = await ytdl.getInfo(url)
     let title = await camelCaseConvertor(info.videoDetails.title)
     let description = info.videoDetails.description
-    let lengthSecs = info.videoDetails.lengthSeconds
-    let viewCount = info.videoDetails.viewCount
-    let publishDate = info.videoDetails.publishDate
+    let lengthSecs = parseInt(info.videoDetails.lengthSeconds)
+    let viewCount = parseInt(info.videoDetails.viewCount)
+    let publishDate = new Date(info.videoDetails.publishDate)
     let thumbnailLink = info.videoDetails.thumbnails
     let ownerChannelName = info.videoDetails.ownerChannelName
-    let likes = info.videoDetails.likes
+    let likes = parseInt(info.videoDetails.likes)
     // console.log(`Video Details \ntitle: ${title}\ndescription: ${description}\nlength in seconds: ${lengthSecs}\nView Count: ${viewCount}\nPublish Date: ${publishDate}\nThumbnails: ${thumbnailLink}\nOwner Channel: ${ownerChannelName}\nLike Count: ${likes}`)
     // console.log(Object.keys(info.videoDetails))
     return {title,description,lengthSecs,viewCount,publishDate,thumbnailLink,ownerChannelName,likes}
