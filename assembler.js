@@ -52,8 +52,8 @@ async function main(url){
     await collection.insertOne(fullData);
     // console.log("Process Complete. Ciao")
     console.log(`Process complete for ${data.title}`)
-    process.exit(0) //Remove this when you are doing concurrent transcription
+    // process.exit(0) //Remove this when you are doing concurrent transcription
 }
 
-main(url)
+// main(url)
 module.exports= {main}
