@@ -14,10 +14,11 @@ const filePath = './video.mp3';
 async function mp3Convertor(url, fileName){
     // Use ffmpeg to convert the video stream to an MP3 file.
 
-    const stream = ytdl(url, { filter: 'audioonly' });
+    const stream = await ytdl(url, { filter: 'audioonly' });
     await ffmpeg(stream).output(`./${fileName}.mp3`).run()
+    console.log("Done in youtube convertor code")
 }
 
-// mp3Convertor( "https://www.youtube.com/watch?v=IKSsO4VjP7k&ab_channel=JREHouse","KRE")
+// mp3Convertor( "https://www.youtube.com/watch?v=Ji1DKxzJ-js&ab_channel=AssemblyAI","assemblyAI")
 
 module.exports = {mp3Convertor}

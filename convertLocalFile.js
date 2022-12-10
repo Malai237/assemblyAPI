@@ -12,10 +12,10 @@ const assembly = axios.create({
     },
 });
 // const file = "./joeRogan&DerekAboutDavidGoggins.mp3";
-const file = "areYouReady";
+// const file = "areYouReady";
 
 
-async function upload(fileName) {
+async function localToCloud(fileName) {
 
     const data = await fs.readFileSync(`./${fileName}.mp3`);
     console.log(fileName)
@@ -29,4 +29,4 @@ async function upload(fileName) {
 
 };
 
-module.exports = {upload}
+module.exports = {localToCloud}

@@ -11,7 +11,7 @@ const assembly = axios.create({
 });
 
 
-let audio_url = "https://cdn.assemblyai.com/upload/dbdbaba8-a92d-4736-a509-701955c8198a";
+let audio_url = "https://www.youtube.com/watch?v=Ji1DKxzJ-js&ab_channel=AssemblyAI";
 
 async function upload(audio_url){
     let res = await assembly.post("/transcript", {
@@ -29,5 +29,5 @@ async function upload(audio_url){
     return id
 }
 
-upload(audio_url)
+// upload(audio_url)
 module.exports ={upload}
