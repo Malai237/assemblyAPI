@@ -30,8 +30,16 @@ async function retrieveSentences(transcriptID){
     }
 
     let sentences = res.data.sentences
-    return {sentences}
+    let timedTranscription =""
+    await sentences.forEach(sentence => { timedTranscription += appendTimestamp(sentence) });
+    console.log(timedTranscription)
+    return {sentences,timedTranscription}
 
+}
+
+function appendTimestamp(sentenceArr){
+    let value = `<<${sentenceArr.start}>>${sentenceArr.text}<<${sentenceArr.end}>>`
+    return value;
 }
 
 // retrieveSentences('r7iejym7tg-c579-4bc1-9888-e281393160ea')
