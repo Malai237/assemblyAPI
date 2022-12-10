@@ -11,7 +11,7 @@ const assembly = axios.create({
 });
 
 
-let audio_url = "https://cdn.assemblyai.com/upload/6c77a54e-3746-434b-82fe-00b9064b7e0c";
+let audio_url = "https://cdn.assemblyai.com/upload/dbdbaba8-a92d-4736-a509-701955c8198a";
 
 async function upload(audio_url){
     let res = await assembly.post("/transcript", {
@@ -26,7 +26,8 @@ async function upload(audio_url){
     let id = await res.data.id
 
     console.log(id)
+    return id
 }
 
-// upload(audio_url)
+upload(audio_url)
 module.exports ={upload}

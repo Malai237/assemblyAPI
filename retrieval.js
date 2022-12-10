@@ -11,26 +11,33 @@ const assembly = axios.create({
     },
 });
 
-let transcriptID = 'r7l7ro2wvs-eba6-4bca-acbb-ac34f12fab7f'
+// let transcriptID = 'r7l7ro2wvs-eba6-4bca-acbb-ac34f12fab7f'
 
 
-async function upload(transcriptID){
+async function retrieve(transcriptID){
     let found = false
     let res =""
     while (!found){
         res = await assembly.get(`/transcript/${transcriptID}`);
+        console.log(res.data.status)
 
         if (res.data.status == "completed"){
             found = true;
+        } else {
+            console.log(`Still searching data for ${transcriptID}`)
+            await delay(10000);
         }
-        console.log(`Still searching data for ${transcriptID}`)
-        await delay(5000);
+
     }
-    console.log(Object.keys(res.data))
-    console.log(`Summary: ${res.data.summary}`)
-    console.log(`Transcription: ${res.data.text}`)
+    // console.log(Object.keys(res.data))
+    // console.log(`Summary: ${res.data.summary}`)
+    // console.log(`Transcription: ${res.data.text}`)
+    let summary = res.data.summary
+    let transcription = res.data.text
+    return {summary,transcription}
 
 }
 
+retrieve('r7iejym7tg-c579-4bc1-9888-e281393160ea')
 
-upload(transcriptID)
+module.exports = {retrieve}
