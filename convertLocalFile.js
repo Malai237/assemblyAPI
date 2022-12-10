@@ -29,10 +29,4 @@ async function upload(fileName) {
 
 };
 
-async function main (file){
-    let output = await upload(file)
-    console.log(`The output is: ${output}`)
-}
-
-main(file)
-console.log("Done")
+module.exports = {upload}
