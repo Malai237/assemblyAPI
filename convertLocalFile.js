@@ -14,28 +14,6 @@ const assembly = axios.create({
 // const file = "./joeRogan&DerekAboutDavidGoggins.mp3";
 const file = "areYouReady";
 
-// async function localToCloud(fileName){
-//     // Use the await keyword to pause the execution of the async function until the fs.readFile() function returns a value
-//     const data = await fs.readFile(`./${fileName}.mp3`, (err, data) => {
-//         if (err) return console.error(err);
-//         else return data;
-//       });
-//       res = await assembly.post("/upload", data)
-//       console.log(res.data.upload_url)
-//       return res.data.upload_url
-// }
-
-  
-// module.exports = {localToCloud}
-// const file = "PATH-TO-YOUR-FILE";
-// fs.readFile(`./${fileName}.mp3`, (err, data) => {
-//     if (err) return console.error(err);
-
-//     assembly
-//         .post("/upload", data)
-//         .then((res) => console.log(res.data))
-//         .catch((err) => console.error(err));
-// });
 
 async function upload(fileName) {
 
@@ -43,12 +21,18 @@ async function upload(fileName) {
     console.log(fileName)
     // Use the data returned from the fs.readFile() function
     const res = await assembly.post("/upload", data);
-    // let url = res.data.url
+
+    console.log(res.data)
+    let url = res.data.upload_url
     // Return the res.data value from the async function
     return url;
 
-  };
-  
-  // Call the upload() function and print the return value
-  console.log(`The url is: ${upload(file)}`);
-  console.log("Done")
+};
+
+async function main (file){
+    let output = await upload(file)
+    console.log(`The output is: ${output}`)
+}
+
+main(file)
+console.log("Done")
