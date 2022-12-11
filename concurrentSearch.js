@@ -9,9 +9,9 @@ let youtubeLinks =["https://www.youtube.com/watch?v=qPHVIIXu0hM&ab_channel=Assem
                 "https://www.youtube.com/watch?v=Oqre8AW8Sig&ab_channel=AssemblyAI",
                 "https://www.youtube.com/watch?v=dccdadl90vs&ab_channel=AssemblyAI"]
 
+let dashBoardCollection = "assemblyAIVideos"
 
-
-async function concurrentFinder(youtubeLinks){
+async function concurrentFinder(youtubeLinks,dashBoardCollection){
     while (i < youtubeLinks.length){
 
         if (int+i < youtubeLinks.length ){

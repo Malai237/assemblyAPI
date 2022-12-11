@@ -17,11 +17,11 @@ const uri = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@cluster0.mqxy
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:true });
 
 const database = client.db(DATABASE_NAME);
-let dashBoardCollection = "testSet"
+// let dashBoardCollection = "testSet"
 
 let url = "https://www.youtube.com/watch?v=Ji1DKxzJ-js&ab_channel=AssemblyAI"
 // Use the imported module
-async function main(url){
+async function main(url,dashBoardCollection){
     let data = await extract_details.extract(url);
     // console.log(url)
     console.log(`Details extracted for ${data.title}, converting to a mp3 file now`)
