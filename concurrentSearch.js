@@ -14,15 +14,17 @@ let dashBoardCollection = "assemblyAIVideos"
 
 async function concurrentFinder(youtubeLinks,dashBoardCollection){
     console.log(`Length of Document: ${youtubeLinks.length}`)
+    const nonNullValues = youtubeLinks.filter(element => {
+        return element !== null;
+    });
+    while (i < nonNullValues.length){
 
-    while (i < youtubeLinks.length){
-
-        if (int+i < youtubeLinks.length ){
+        if (int+i < nonNullValues.length ){
         end = int+i
         } else {
-        end = youtubeLinks.length
+        end = nonNullValues.length
         }
-        let partialBlockNums = youtubeLinks.slice(i,end)
+        let partialBlockNums = nonNullValues.slice(i,end)
         console.log(`Length of partial blocks: ${partialBlockNums.length}`)
         await Promise.all(partialBlockNums.map(async(url)=>{
             try{
