@@ -1,22 +1,25 @@
 const singleTranscription = require(`./assembler.js`)
-const youtubeLinks = require(`./youtubeIDs.json`)
+// const youtubeLinks = require(`./youtubeIDs.json`)
 let i = 0;
 let int =5;
 let end = 0
-// let youtubeLinks =["https://www.youtube.com/watch?v=qPHVIIXu0hM&ab_channel=AssemblyAI",
-//                 "https://www.youtube.com/watch?v=Ha-6cL2gUrY&ab_channel=AssemblyAI",
-//                 "https://www.youtube.com/watch?v=fOLdyUaaPrY&ab_channel=AssemblyAI",
-//                 "https://www.youtube.com/watch?v=tb_IG0lF27Y&ab_channel=AssemblyAI",
-//                 "https://www.youtube.com/watch?v=Oqre8AW8Sig&ab_channel=AssemblyAI",
-//                 "https://www.youtube.com/watch?v=dccdadl90vs&ab_channel=AssemblyAI"]
+let youtubeIDs =["UHSkjro-VbE",
+                "XuHfzVkZGBU",
+                "vfDL2nmyaL8",
+                "lnufceCxwG0",
+                "27Z1svBtl1c",
+                "htCtph_yLOw",
+                "3MRWBahy02U",
+                "F7XGddoTxrA",
+                "i5t4PlGvYmI"]
 
 let dashBoardCollection = "showcaseData"
-let collectionSlug = "assemblyAIVideos"
-let channelName = "AssemblyAI"
+let collectionSlug = "llm"
 
-async function concurrentFinder(youtubeLinks,channelName,dashBoardCollection,collectionSlug){
-    console.log(`Length of Document: ${youtubeLinks.length}`)
-    const nonNullValues = youtubeLinks.filter(element => {
+
+async function concurrentFinder(youtubeIDs,dashBoardCollection,collectionSlug){
+    console.log(`Length of Document: ${youtubeIDs.length}`)
+    const nonNullValues = youtubeIDs.filter(element => {
         return element !== null;
     });
     while (i < nonNullValues.length){
@@ -28,12 +31,13 @@ async function concurrentFinder(youtubeLinks,channelName,dashBoardCollection,col
         }
         let partialBlockNums = nonNullValues.slice(i,end)
         console.log(`Length of partial blocks: ${partialBlockNums.length}`)
-        await Promise.all(partialBlockNums.map(async(url)=>{
+        await Promise.all(partialBlockNums.map(async(youtubeID)=>{
             try{
                 // console.log(url)
-                await singleTranscription.main(`https://www.youtube.com/watch?v=${url}&ab_channel=${channelName}`,dashBoardCollection,collectionSlug)
+                await singleTranscription.main(youtubeID,dashBoardCollection,collectionSlug) //Takes in the videoID
+                // await singleTranscription.main(url,dashBoardCollection,collectionSlug) //takes in the whole url as the argument
             } catch (e){
-                console.log(`Error: ${e} for block code: ${url}`)
+                console.log(`Error: ${e} for block code: ${youtubeID}`)
             }
         }))
     i+=int
@@ -41,4 +45,4 @@ async function concurrentFinder(youtubeLinks,channelName,dashBoardCollection,col
     process.exit(0)
 }
 
-concurrentFinder(youtubeLinks,channelName,dashBoardCollection,collectionSlug)
+concurrentFinder(youtubeIDs,dashBoardCollection,collectionSlug)

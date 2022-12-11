@@ -1,6 +1,7 @@
 const extract_details = require('./extractDetails.js');
 const youtubeConvertor = require(`./youtubeConvertor`)
 const convertLocalFile = require(`./convertLocalFile`)
+const rapidAPIConvertor = require(`./rapidAPIYoutubeConvertor`)
 const uploadData = require(`./uploadData`);
 const fs = require("fs");
 // require('dotenv').config();
@@ -21,15 +22,16 @@ const database = client.db(DATABASE_NAME);
 
 let url = "https://www.youtube.com/watch?v=Ji1DKxzJ-js&ab_channel=AssemblyAI"
 // Use the imported module
-async function main(url,dashBoardCollection,collectionSlug){
-    let data = await extract_details.extract(url);
-    // console.log(url)
-    console.log(`Details extracted for ${data.title}, converting to a mp3 file now`)
-    let mp3 = await youtubeConvertor.mp3Convertor(url,data.title)
-    await delay(5000); //Takes time to be uploaded into local
-    let cloudLink = await convertLocalFile.localToCloud(data.title)
-    let transcriptID = await uploadData.upload(cloudLink);
-    // console.log(transcriptID)
+async function main(videoID,dashBoardCollection,collectionSlug){
+    let data = await extract_details.extract(videoID);
+    // // console.log(url)
+    // console.log(`Details extracted for ${data.title}, converting to a mp3 file now`)
+    // let mp3 = await youtubeConvertor.mp3Convertor(url,data.title)
+    // await delay(5000); //Takes time to be uploaded into local
+    // let cloudLink = await convertLocalFile.localToCloud(data.title)
+    const YTcloudLink = await rapidAPIConvertor.convertor(videoID)
+    let transcriptID = await uploadData.upload(YTcloudLink);
+
     let results = await retrieveData.retrieve(transcriptID)
     // console.log(results)
     let setences = await retrieveSentences.retrieveSentences(transcriptID)
@@ -44,5 +46,5 @@ async function main(url,dashBoardCollection,collectionSlug){
     // process.exit(0) //Remove this when you are doing concurrent transcription
 }
 
-// main(url,'testint123','nothinDoinBruh')
+// main('i5t4PlGvYmI','testint123','nothinDoinBruh')
 module.exports= {main}

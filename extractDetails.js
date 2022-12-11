@@ -21,7 +21,7 @@ async function camelCaseConvertor(myString){
 }
 
 async function extract(url){
-    let info = await ytdl.getInfo(url)
+    let info = await ytdl.getInfo(`https://www.youtube.com/watch?v=${url}`)
     let title = await camelCaseConvertor(info.videoDetails.title)
     let description = info.videoDetails.description
     let lengthSecs = parseInt(info.videoDetails.lengthSeconds)
