@@ -21,7 +21,7 @@ const database = client.db(DATABASE_NAME);
 
 let url = "https://www.youtube.com/watch?v=Ji1DKxzJ-js&ab_channel=AssemblyAI"
 // Use the imported module
-async function main(url,dashBoardCollection){
+async function main(url,dashBoardCollection,collectionSlug){
     let data = await extract_details.extract(url);
     // console.log(url)
     console.log(`Details extracted for ${data.title}, converting to a mp3 file now`)
@@ -33,7 +33,7 @@ async function main(url,dashBoardCollection){
     let results = await retrieveData.retrieve(transcriptID)
     // console.log(results)
     let setences = await retrieveSentences.retrieveSentences(transcriptID)
-    let fullData = {...data,...results,...setences}
+    let fullData = {...data,...results,...setences,videoURL:url,collectionSlug:collectionSlug}
     //Uploading data into mongoDB
     console.log("Uploading data into mongoDB")
     await client.connect();
@@ -44,5 +44,5 @@ async function main(url,dashBoardCollection){
     // process.exit(0) //Remove this when you are doing concurrent transcription
 }
 
-// main(url,'testint123')
+// main(url,'testint123','nothinDoinBruh')
 module.exports= {main}
