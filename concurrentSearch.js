@@ -31,7 +31,7 @@ async function concurrentFinder(youtubeLinks,channelName,dashBoardCollection,col
         await Promise.all(partialBlockNums.map(async(url)=>{
             try{
                 // console.log(url)
-                await singleTranscription.main(`https://www.youtube.com/watch?v=${url}&ab_channel=${channelName}`,dashBoardCollection)
+                await singleTranscription.main(`https://www.youtube.com/watch?v=${url}&ab_channel=${channelName}`,dashBoardCollection,collectionSlug)
             } catch (e){
                 console.log(`Error: ${e} for block code: ${url}`)
             }
