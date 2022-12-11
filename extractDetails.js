@@ -17,7 +17,7 @@ async function camelCaseConvertor(myString){
 
     // Join the words back into a string
     const camelCaseString = words.join('');
-    return camelCaseString;
+    return camelCaseString.replace("/", "");
 }
 
 async function extract(url){

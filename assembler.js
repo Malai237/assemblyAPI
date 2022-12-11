@@ -34,17 +34,6 @@ async function main(url,dashBoardCollection){
     // console.log(results)
     let setences = await retrieveSentences.retrieveSentences(transcriptID)
     let fullData = {...data,...results,...setences}
-    //Outputing a JSON file
-    // console.log(JSON.stringify(fullData,null,5))
-    // console.log(Object.keys(fullData))
-    // fs.writeFile("output.json", JSON.stringify(fullData), 'utf8', function (err) {
-    //     if (err) {
-    //         console.log("An error occured while writing JSON Object to File.");
-    //         return console.log(err);
-    //     }
-     
-    //     console.log("JSON file has been saved.");
-    // });
     //Uploading data into mongoDB
     console.log("Uploading data into mongoDB")
     await client.connect();
@@ -55,5 +44,5 @@ async function main(url,dashBoardCollection){
     // process.exit(0) //Remove this when you are doing concurrent transcription
 }
 
-// main(url)
+// main(url,'testint123')
 module.exports= {main}

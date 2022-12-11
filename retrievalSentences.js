@@ -32,7 +32,7 @@ async function retrieveSentences(transcriptID){
     let sentences = res.data.sentences
     let timedTranscription =""
     await sentences.forEach(sentence => { timedTranscription += appendTimestamp(sentence) });
-    console.log(timedTranscription)
+    // console.log(timedTranscription)
     return {sentences,timedTranscription}
 
 }

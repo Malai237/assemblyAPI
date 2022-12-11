@@ -16,16 +16,20 @@ const assembly = axios.create({
 
 
 async function localToCloud(fileName) {
+    try{
+        const data = await fs.readFileSync(`./${fileName}.mp3`);
+        // console.log(fileName)
+        // Use the data returned from the fs.readFile() function
+        const res = await assembly.post("/upload", data);
+    
+        // console.log(res.data)
+        let url = res.data.upload_url
+        // Return the res.data value from the async function
+        return url;
+    } catch(e){
+        console.log(`Problem with ${fileName} at convertLocalFile.js`)
+    }
 
-    const data = await fs.readFileSync(`./${fileName}.mp3`);
-    // console.log(fileName)
-    // Use the data returned from the fs.readFile() function
-    const res = await assembly.post("/upload", data);
-
-    // console.log(res.data)
-    let url = res.data.upload_url
-    // Return the res.data value from the async function
-    return url;
 
 };
 
